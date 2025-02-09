@@ -16,8 +16,4 @@ const getTaskArray = () => {
   return array;
 };
 
-export default () => {
-  // const numRandom = Math.floor(Math.random() * 100);
-  // const correctAnswer = getCorrectAnswer(numRandom);
-  app(description, getTaskArray());
-};
+export default () => app(description, getTaskArray());
