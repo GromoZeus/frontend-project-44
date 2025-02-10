@@ -3,21 +3,21 @@ import app from '../src/index.js';
 const description = 'Find the greatest common divisor of given numbers.';
 
 const getCorrectAnswer = (num1, num2) => {
-  if (!num1) {
-    return num2;
-  } if (!num2) {
-    return num1;
-  }
   let numA = Math.max(num1, num2);
   let numB = Math.min(num1, num2);
+  if (!numB) {
+    return numA;
+  }
   while (numB) {
     const division = numA % numB;
     if (division) {
       numA = numB;
       numB = division;
+    } else {
+      return numB;
     }
   }
-  return numB;
+  return numA;
 };
 
 const getTaskArray = () => {
