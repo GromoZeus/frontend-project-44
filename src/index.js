@@ -1,13 +1,25 @@
-import { getQuestion, getUser } from './cli.js';
+import * as cli from './cli.js';
 
 export default (description, expressionAnswer) => {
-  const name = getUser();
+  // выводим приветствие и описание игры
+  const name = cli.getUser();
   console.log(description);
+
+  // количество раундов
   const roundsCount = 3;
+
+  // цколичество правильных ответов
   let correctAnswersCount = 0;
+
+  // цикл игры
   for (let i = 0; i < roundsCount; i += 1) {
-    const [expression, correctAnswer] = expressionAnswer[i];
-    const answer = getQuestion(`Question: ${expression}\nYour answer: `);
+    // получаем вопрос и правильный ответ
+    const [expression, correctAnswer] = expressionAnswer();
+
+    // выводим вопрос и получаем ответ
+    const answer = cli.getQuestion(`Question: ${expression}\nYour answer: `);
+
+    // проверяем ответ
     if (answer === correctAnswer) {
       console.log('Correct!');
       correctAnswersCount += 1;
@@ -16,6 +28,8 @@ export default (description, expressionAnswer) => {
       console.log(`Let's try again, ${name}!`);
       i = 3;
     }
+
+    // выводим поздравление
     if (correctAnswersCount === roundsCount) {
       console.log(`Congratulations, ${name}!`);
     }

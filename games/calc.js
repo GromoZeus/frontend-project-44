@@ -2,6 +2,7 @@ import app from '../src/index.js';
 
 const description = 'What is the result of the expression?';
 
+// вычисление результата выражения
 const getCorrectAnswer = (num1, num2, operator) => {
   switch (operator) {
     case '+':
@@ -15,17 +16,18 @@ const getCorrectAnswer = (num1, num2, operator) => {
   }
 };
 
-const getTaskArray = () => {
-  const array = [];
-  for (let i = 1; i <= 3; i += 1) {
-    const num1 = Math.floor(Math.random() * 100);
-    const num2 = Math.floor(Math.random() * 100);
-    const operators = ['+', '-', '*'];
-    const operator = operators[Math.floor(Math.random() * operators.length)];
-    const correctAnswer = getCorrectAnswer(num1, num2, operator);
-    array.push([`${num1}${operator}${num2}`, String(correctAnswer)]);
-  }
-  return array;
+const getTask = () => {
+  // генерация двух случайных чисел и оператора
+  const numRnd1 = Math.floor(Math.random() * 100);
+  const numRnd2 = Math.floor(Math.random() * 100);
+  const operators = ['+', '-', '*'];
+  const operRnd = operators[Math.floor(Math.random() * operators.length)];
+
+  // находим правильный ответ
+  const correctAnswer = String(getCorrectAnswer(numRnd1, numRnd2, operRnd));
+
+  // возвращаем вопрос и правильный ответ
+  return [`${numRnd1} ${operRnd} ${numRnd2}`, correctAnswer];
 };
 
-export default () => app(description, getTaskArray());
+export default () => app(description, getTask);

@@ -2,18 +2,15 @@ import app from '../src/index.js';
 
 const description = 'Answer "yes" if the number is even, otherwise answer "no".';
 
-const isEven = (num) => num % 2 === 0;
+const getTask = () => {
+  // генерация случайного числа
+  const numRnd = Math.floor(Math.random() * 100);
 
-const getCorrectAnswer = (num) => (isEven(num) ? 'yes' : 'no');
+  // находим правильный ответ
+  const correctAnswer = numRnd % 2 === 0 ? 'yes' : 'no';
 
-const getTaskArray = () => {
-  const array = [];
-  for (let i = 1; i <= 3; i += 1) {
-    const numRandom = Math.floor(Math.random() * 100);
-    const correctAnswer = getCorrectAnswer(numRandom);
-    array.push([numRandom, correctAnswer]);
-  }
-  return array;
+  // возвращаем вопрос и правильный ответ
+  return [numRnd, correctAnswer];
 };
 
-export default () => app(description, getTaskArray());
+export default () => app(description, getTask);
