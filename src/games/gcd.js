@@ -1,4 +1,4 @@
-import app from '../src/index.js';
+import app from '../index.js';
 
 const description = 'Find the greatest common divisor of given numbers.';
 

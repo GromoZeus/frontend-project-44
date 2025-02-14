@@ -1,8 +1,19 @@
-import * as cli from './cli.js';
+import readlineSync from 'readline-sync';
+import getUser from './cli.js';
+
+// создаем функцию, которая принимает вопрос и возвращает ответ
+export const getQuestion = (question) => {
+  const item = readlineSync.question(question).trim();
+  if (item === '') {
+    console.log('Please enter a valid value');
+    return getQuestion(question);
+  }
+  return item;
+};
 
 export default (description, expressionAnswer) => {
   // выводим приветствие и описание игры
-  const name = cli.getUser();
+  const name = getUser();
   console.log(description);
 
   // количество раундов
@@ -17,7 +28,7 @@ export default (description, expressionAnswer) => {
     const [expression, correctAnswer] = expressionAnswer();
 
     // выводим вопрос и получаем ответ
-    const answer = cli.getQuestion(`Question: ${expression}\nYour answer: `);
+    const answer = getQuestion(`Question: ${expression}\nYour answer: `);
 
     // проверяем ответ
     if (answer === correctAnswer) {
