@@ -19,11 +19,8 @@ export default (description, expressionAnswer) => {
   // количество раундов
   const roundsCount = 3;
 
-  // цколичество правильных ответов
-  let correctAnswersCount = 0;
-
   // цикл игры
-  for (let i = 0; i < roundsCount; i += 1) {
+  for (let i = 1; i <= roundsCount; i += 1) {
     // получаем вопрос и правильный ответ
     const [expression, correctAnswer] = expressionAnswer();
 
@@ -33,16 +30,15 @@ export default (description, expressionAnswer) => {
     // проверяем ответ
     if (answer === correctAnswer) {
       console.log('Correct!');
-      correctAnswersCount += 1;
+
+      // выводим поздравление, если игрок угадал все ответы
+      if (i === roundsCount) {
+        console.log(`Congratulations, ${name}!`);
+      }
     } else {
       console.log(`'${answer}' is wrong answer ;(. Correct answer was '${correctAnswer}'.`);
       console.log(`Let's try again, ${name}!`);
       i = 3;
-    }
-
-    // выводим поздравление
-    if (correctAnswersCount === roundsCount) {
-      console.log(`Congratulations, ${name}!`);
     }
   }
 };
